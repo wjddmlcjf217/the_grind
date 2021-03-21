@@ -96,6 +96,16 @@ class Solution:
                 return i
         return n
 
+# nlog(n) solution by sorting first
+class Solution:
+    def firstMissingPositive(self, nums: List[int]) -> int:
+        nums.sort()
+        output = 1
+        for i in range(len(nums)):
+            if nums[i] == output:
+                output += 1
+        return output
+        
 # Q: Given a non-empty array of integers, every element appears twice except for one. Find that single one.
 # Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory?
 
