@@ -1,4 +1,3 @@
-CYCLIC SORT
 # 268. Missing Number
 # Easy
 
@@ -35,17 +34,6 @@ CYCLIC SORT
 # Output: 1
 # Explanation: n = 1 since there is 1 number, so all numbers are in the range [0,1]. 1 is the missing number in the range since it does not appear in nums.
 
-# Q: Given a non-empty array of integers, every element appears twice except for one. Find that single one.
-# Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory?
-
-# Example 1:
-# Input: [2,2,1]
-# Output: 1
-
-# Example 2:
-# Input: [4,1,2,1,2]
-# Output: 4
-
 # Brute Force using set
 class Solution:
     def missingNumber(self, nums: List[int]) -> int:
@@ -57,6 +45,68 @@ class Solution:
             if i not in numbers:
                 return i
         return i + 1
+
+# 41. First Missing Positive
+# Hard
+
+# 5390
+
+# 953
+
+# Add to List
+
+# Share
+# Given an unsorted integer array nums, find the smallest missing positive integer.
+
+ 
+
+# Example 1:
+
+# Input: nums = [1,2,0]
+# Output: 3
+# Example 2:
+
+# Input: nums = [3,4,-1,1]
+# Output: 2
+# Example 3:
+
+# Input: nums = [7,8,9,11,12]
+# Output: 1
+
+# after removing all the numbers greater than or equal to n, all the numbers remaining are smaller than n. If any number i appears, 
+# we add n to nums[i] which makes nums[i]>=n. Therefore, if nums[i]<n, it means i never appears in the array and we should return i.
+class Solution:
+    def firstMissingPositive(self, nums: List[int]) -> int:
+        # for any array whose length is l, the first missing
+        # positive must be in range [1,...,l+1], eg. [1, 2, 3] -> 4
+        # so we only have to care about those elements in this range and
+        # remove the rest.
+        # 2. we can use the array index as the hash to restore the 
+        # frequency of each number within  the range [1,...,l+1] 
+        
+        nums.append(0) # in order to hash, we need a 0 value
+        n = len(nums) # original n + 1, since we added 0 above
+        for i in range(len(nums)):
+            if nums[i] < 1 or nums[i] >= n: 
+                nums[i] = 0
+        for i in range(len(nums)):
+            nums[nums[i]%n] += n
+        for i in range(1, len(nums)):
+            if nums[i] // n == 0:
+                return i
+        return n
+
+# Q: Given a non-empty array of integers, every element appears twice except for one. Find that single one.
+# Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory?
+
+# Example 1:
+# Input: [2,2,1]
+# Output: 1
+
+# Example 2:
+# Input: [4,1,2,1,2]
+# Output: 4
+
 
 # O(n^2) since iterate through nums O(n), then search method is also O(n), thus O(n^2)
 def single_number(nums):
