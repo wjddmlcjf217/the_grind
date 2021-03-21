@@ -1,3 +1,40 @@
+CYCLIC SORT
+# 268. Missing Number
+# Easy
+
+# 2823
+
+# 2485
+
+# Add to List
+
+# Share
+# Given an array nums containing n distinct numbers in the range [0, n], return the only number in the range that is missing from the array.
+
+# Follow up: Could you implement a solution using only O(1) extra space complexity and O(n) runtime complexity?
+
+
+# Example 1:
+
+# Input: nums = [3,0,1]
+# Output: 2
+# Explanation: n = 3 since there are 3 numbers, so all numbers are in the range [0,3]. 2 is the missing number in the range since it does not appear in nums.
+# Example 2:
+
+# Input: nums = [0,1]
+# Output: 2
+# Explanation: n = 2 since there are 2 numbers, so all numbers are in the range [0,2]. 2 is the missing number in the range since it does not appear in nums.
+# Example 3:
+
+# Input: nums = [9,6,4,2,3,5,7,0,1]
+# Output: 8
+# Explanation: n = 9 since there are 9 numbers, so all numbers are in the range [0,9]. 8 is the missing number in the range since it does not appear in nums.
+# Example 4:
+
+# Input: nums = [0]
+# Output: 1
+# Explanation: n = 1 since there is 1 number, so all numbers are in the range [0,1]. 1 is the missing number in the range since it does not appear in nums.
+
 # Q: Given a non-empty array of integers, every element appears twice except for one. Find that single one.
 # Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory?
 
@@ -9,7 +46,19 @@
 # Input: [4,1,2,1,2]
 # Output: 4
 
-# Shit way, O(n^2) since iterate through nums O(n), then search method is also O(n), thus O(n^2)
+# Brute Force using set
+class Solution:
+    def missingNumber(self, nums: List[int]) -> int:
+        # numbers in nums is 0 - len(nums)
+        # evaluate if each value is in the set, if not return that index 
+        # account for the fact the range method is not inclusive, so return i+1 at the end if we go to the end  
+        numbers = set(nums)
+        for i in range(len(nums)):
+            if i not in numbers:
+                return i
+        return i + 1
+
+# O(n^2) since iterate through nums O(n), then search method is also O(n), thus O(n^2)
 def single_number(nums):
     no_duplicate_list = []
     for num in nums:
