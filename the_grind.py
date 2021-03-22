@@ -46,6 +46,7 @@ class Solution:
                 return i
         return i + 1
 
+
 # 448. Find All Numbers Disappeared in an Array
 # Easy
 
@@ -86,6 +87,22 @@ class Solution:
         for key, value in num_map.items():
             if value == 0:
                 output.append(key)
+        return output
+
+# using the nums[nums[i]%n]+= n expresssion to find missing numbers, hashing method using index 
+class Solution:
+    def findDisappearedNumbers(self, nums: List[int]) -> List[int]:
+        output = []
+        if not nums:
+            return output
+        # range of possible values is 1 - len(nums) 
+        nums.append(0)
+        n = len(nums)
+        for i in range(n):
+            nums[nums[i]%n] += n
+        for i in range(n):
+            if nums[i] // n == 0:
+                output.append(i)
         return output
 
 # 41. First Missing Positive
