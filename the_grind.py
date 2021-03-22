@@ -2146,6 +2146,25 @@ class Solution:
                 if not curr_node.left and not curr_node.right:
                     min_depth = min(min_depth, curr_depth)
         return min_depth
+BFS modified solution from above
+class Solution:
+    def minDepth(self, root: TreeNode) -> int:
+        # traverse tree and check if a node is a leaf
+        # leaf node has no right or left child
+        
+        if not root:
+            return 0
+        queue = deque([(root, 1)])
+        while queue:
+            size = len(queue)
+            for i in range(size):
+                curr_node, level = queue.popleft()      
+                if curr_node.left:
+                    queue.append((curr_node.left, level + 1))
+                if curr_node.right:
+                    queue.append((curr_node.right, level + 1))
+                if not curr_node.left and not curr_node.right:
+                    return level
 
 
 # 104. Maximum Depth of Binary Tree
