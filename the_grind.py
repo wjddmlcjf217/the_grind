@@ -46,6 +46,48 @@ class Solution:
                 return i
         return i + 1
 
+# 448. Find All Numbers Disappeared in an Array
+# Easy
+
+# 3979
+
+# 287
+
+# Add to List
+
+# Share
+# Given an array of integers where 1 ≤ a[i] ≤ n (n = size of array), some elements appear twice and others appear once.
+
+# Find all the elements of [1, n] inclusive that do not appear in this array.
+
+# Could you do it without extra space and in O(n) runtime? You may assume the returned list does not count as extra space.
+
+# Example:
+
+# Input:
+# [4,3,2,7,8,2,3,1]
+
+# Output:
+# [5,6]
+
+# brute force using hashmap to keep track of numbers that exist within possible range, then returning values that never got incremented for not existing
+class Solution:
+    def findDisappearedNumbers(self, nums: List[int]) -> List[int]:
+        output = []
+        if not nums:
+            return output
+        num_map = {}
+        max_num = len(nums)
+        for i in range(1, max_num + 1):
+            num_map[i] = 0
+        for i in range(len(nums)):
+            if nums[i] in num_map:
+                num_map[nums[i]] += 1
+        for key, value in num_map.items():
+            if value == 0:
+                output.append(key)
+        return output
+
 # 41. First Missing Positive
 # Hard
 
@@ -105,7 +147,7 @@ class Solution:
             if nums[i] == output:
                 output += 1
         return output
-        
+
 # Q: Given a non-empty array of integers, every element appears twice except for one. Find that single one.
 # Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory?
 
