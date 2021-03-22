@@ -608,7 +608,8 @@ def rotate(self, nums: List[int], k: int) -> None:
         # The expression (i+k) % len(nums) each iteration = 3,4,5,6,0,1,2
         rotated_arr[(i+k)%len(nums)] = nums[i]
     nums[:] = rotated_arr # list splice expression to make sure nums array is replaced by shifted_arr, without it wouldn't work
-            
+
+BINARY SEARCH
 # 704. Binary Search
 # Easy
 
@@ -1884,7 +1885,7 @@ def mergeKLists(self, lists: List[ListNode]) -> ListNode:
     
     return head.next
 
-
+BFS
 # 102. Binary Tree Level Order Traversal
 # Medium
 
@@ -1942,6 +1943,7 @@ class Solution:
             output.append(curr_level)
         return output
 
+BFS
 # 103. z
 # Medium
 
@@ -1996,6 +1998,7 @@ class Solution:
             output.append(curr_level)
         return output
 
+BFS
 # 107. Binary Tree Level Order Traversal II
 # Medium
 
@@ -2044,7 +2047,54 @@ class Solution:
                 curr_level.append(curr_node.val)
             output.appendleft(curr_level)
         return output
+BFS
+# 637. Average of Levels in Binary Tree
+# Easy
 
+# 1921
+
+# 200
+
+# Add to List
+
+# Share
+# Given the root of a binary tree, return the average value of the nodes on each level in the form of an array. Answers within 10-5 of the actual answer will be accepted.
+ 
+
+# Example 1:
+
+
+# Input: root = [3,9,20,null,15,7]
+# Output: [3.00000,14.50000,11.00000]
+# Explanation: The average value of nodes on level 0 is 3, on level 1 is 14.5, and on level 2 is 11.
+# Hence return [3, 14.5, 11].
+# Example 2:
+
+
+# Input: root = [3,9,20,15,7]
+# Output: [3.00000,14.50000,11.00000]
+
+class Solution:
+    def averageOfLevels(self, root: TreeNode) -> List[float]:
+        output = []
+        queue = deque([root])
+        while queue:
+            curr_level = []
+            avg_sum = 0
+            size = len(queue)
+            for i in range(size):
+                curr_node = queue.popleft()
+                if curr_node.left:
+                    queue.append(curr_node.left)
+                if curr_node.right:
+                    queue.append(curr_node.right)
+                curr_level.append(curr_node.val)
+            print(curr_level)
+            for i in range(len(curr_level)):
+                avg_sum += curr_level[i]
+            avg_sum = avg_sum / len(curr_level)
+            output.append(avg_sum)
+        return output
 
 # 104. Maximum Depth of Binary Tree
 # Given a binary tree, find its maximum depth.
