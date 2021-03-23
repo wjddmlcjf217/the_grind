@@ -2261,6 +2261,55 @@ class Solution:
                 root = root.right
         return output
 
+# 145. Binary Tree Postorder Traversal
+# Medium
+
+# 2462
+
+# 113
+
+# Add to List
+
+# Share
+# Given the root of a binary tree, return the postorder traversal of its nodes' values.
+
+ 
+
+# Example 1:
+
+
+# Input: root = [1,null,2,3]
+# Output: [3,2,1]
+# Example 2:
+
+# Input: root = []
+# Output: []
+# Example 3:
+
+# Input: root = [1]
+# Output: [1]
+
+DFS
+
+class Solution:
+    def postorderTraversal(self, root: TreeNode) -> List[int]:
+        traversal, stack = [], [(root, False)]
+        # [1, 2, None] -> [1, 2] -> [1, 2, None, 3] -> [1, 2, None, 3, None, None]
+        # [1, 2, None, 3, None] -> [1, 2, None, 3] -> [1, 2, None] -> [1, 2] -> [1] -> []
+        while stack: 
+            node, visited = stack.pop()
+            if node:
+                if visited:
+                    # add to result if visited
+                    traversal.append(node.val)
+                else:
+                    # post-order
+                    stack.append((node, True))
+                    stack.append((node.right, False))
+                    stack.append((node.left, False))
+        return traversal
+
+
 # 104. Maximum Depth of Binary Tree
 # Given a binary tree, find its maximum depth.
 
