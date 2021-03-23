@@ -2195,6 +2195,25 @@ class Solution:
 # Output: [1]
 
 DFS
+
+class Solution:
+    def inorderTraversal(self, root: TreeNode) -> List[int]:
+        if not root:
+            return []
+        stack = [(root, False)]
+        output = []
+        
+        while stack:
+            curr_node, visited = stack.pop()
+            if curr_node: 
+                if visited:
+                    output.append(curr_node.val)
+                else:
+                    stack.append((curr_node.right, False))
+                    stack.append((curr_node, True))
+                    stack.append((curr_node.left, False))
+        return output
+
 # iterative solution, in order traversal is left, root, right
 class Solution:
     def inorderTraversal(self, root: TreeNode) -> List[int]:
@@ -2212,6 +2231,7 @@ class Solution:
                 output.append(curr_node.val)
                 root = curr_node.right
         return output
+
 
 
 # 144. Binary Tree Preorder Traversal
@@ -2241,6 +2261,24 @@ class Solution:
 
 # Input: root = [1]
 # Output: [1]
+
+class Solution:
+    def preorderTraversal(self, root: TreeNode) -> List[int]:
+        if not root:
+            return []
+        stack = [(root, False)]
+        output = []
+        
+        while stack:
+            curr_node, visited = stack.pop()
+            if curr_node: 
+                if visited:
+                    output.append(curr_node.val)
+                else:
+                    stack.append((curr_node.right, False))
+                    stack.append((curr_node.left, False))
+                    stack.append((curr_node, True))
+        return output
 
 DFS 
 class Solution:
