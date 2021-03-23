@@ -2166,7 +2166,53 @@ class Solution:
                 if not curr_node.left and not curr_node.right:
                     return level
 
+# 94. Binary Tree Inorder Traversal
+# Medium
 
+# 4424
+
+# 197
+
+# Add to List
+
+# Share
+# Given the root of a binary tree, return the inorder traversal of its nodes' values.
+
+ 
+
+# Example 1:
+
+
+# Input: root = [1,null,2,3]
+# Output: [1,3,2]
+# Example 2:
+
+# Input: root = []
+# Output: []
+# Example 3:
+
+# Input: root = [1]
+# Output: [1]
+
+DFS
+# iterative solution, in order traversal is left, root, right
+class Solution:
+    def inorderTraversal(self, root: TreeNode) -> List[int]:
+        if not root:
+            return []
+        
+        stack = []
+        output = []
+        while stack or root:
+            if root:
+                stack.append(root)
+                root = root.left
+            else:
+                curr_node = stack.pop()
+                output.append(curr_node.val)
+                root = curr_node.right
+        return output
+        
 # 104. Maximum Depth of Binary Tree
 # Given a binary tree, find its maximum depth.
 
