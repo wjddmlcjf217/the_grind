@@ -2212,7 +2212,55 @@ class Solution:
                 output.append(curr_node.val)
                 root = curr_node.right
         return output
+
+
+# 144. Binary Tree Preorder Traversal
+# Medium
+
+# 2149
+
+# 87
+
+# Add to List
+
+# Share
+# Given the root of a binary tree, return the preorder traversal of its nodes' values.
+
+ 
+
+# Example 1:
+
+
+# Input: root = [1,null,2,3]
+# Output: [1,2,3]
+# Example 2:
+
+# Input: root = []
+# Output: []
+# Example 3:
+
+# Input: root = [1]
+# Output: [1]
+
+DFS 
+class Solution:
+    def preorderTraversal(self, root: TreeNode) -> List[int]:
+        # root, left, right
+        if not root:
+            return []
+        output = []
+        stack = []
         
+        while stack or root:
+            if root:
+                stack.append(root) 
+                output.append(root.val)
+                root = root.left
+            else:
+                root = stack.pop() 
+                root = root.right
+        return output
+
 # 104. Maximum Depth of Binary Tree
 # Given a binary tree, find its maximum depth.
 
