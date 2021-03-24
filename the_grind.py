@@ -2416,7 +2416,29 @@ class Solution:
             return False
         return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
 
-
+BFS iterative solution
+class Solution:
+    def isSameTree(self, p: TreeNode, q: TreeNode) -> bool:
+        def check(p, q):
+            # both are None
+            if not p and not q:
+                return True
+            # one is None
+            if not p or not q:
+                return False
+            if p.val != q.val:
+                return False
+            return True
+        queue = deque([(p, q)])
+        while queue:
+            p, q = queue.popleft()
+            if not check(p, q):
+                return False
+            if p:
+                queue.append((p.left, q.left))
+                queue.append((p.right, q.right))
+        return True
+        
 # 226. Invert Binary Tree
 # Invert a binary tree.
 
