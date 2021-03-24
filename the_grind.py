@@ -2439,6 +2439,23 @@ class Solution:
                 queue.append((p.right, q.right))
         return True
         
+class Solution:
+    def isSameTree(self, p: TreeNode, q: TreeNode) -> bool:
+        queue = deque([(p, q)])
+        while queue:
+            p, q = queue.popleft()
+            if not p and not q:
+                continue
+            elif not p or not q:
+                return False
+            else:
+                if p.val != q.val:
+                    return False
+                if p:
+                    queue.append((p.left, q.left))
+                    queue.append((p.right, q.right))
+        return True
+        
 # 226. Invert Binary Tree
 # Invert a binary tree.
 
