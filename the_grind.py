@@ -2487,7 +2487,26 @@ class Solution:
         root.right = left
         
         return root
-
+# iterative solution using BFS
+class Solution:
+    def invertTree(self, root: TreeNode) -> TreeNode:
+        if root is None:
+            return None
+        queue = deque([root])
+        nodes = deque([])
+        while queue:
+            size = len(queue)
+            for i in range(size):
+                curr_node = queue.popleft()
+                if curr_node:
+                    tmp_node = curr_node.left
+                    curr_node.left = curr_node.right
+                    curr_node.right = tmp_node
+                    if curr_node.left:
+                        queue.append(curr_node.left)
+                    if curr_node.right:
+                        queue.append(curr_node.right)
+        return root
 
 # 572. Subtree of Another Tree
 # Given two non-empty binary trees s and t, check whether tree t has exactly the same structure and node values with a subtree of s. 
