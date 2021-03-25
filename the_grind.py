@@ -2380,7 +2380,26 @@ class Solution:
             return 0
         else:
             return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))
-        
+
+# iterative bfs
+class Solution:
+    def maxDepth(self, root: TreeNode) -> int:
+        if not root:
+            return 0
+        queue = deque([root])
+        nodes = []
+        while queue:
+            size = len(queue)
+            curr_level = []
+            for i in range(size):
+                curr_node = queue.popleft()
+                if curr_node.left:
+                    queue.append(curr_node.left)
+                if curr_node.right:
+                    queue.append(curr_node.right)
+                curr_level.append(curr_node.val)
+            nodes.append(curr_level)
+        return len(nodes)
 
 # 100. Same Tree
 # Given two binary trees, write a function to check if they are the same or not.
