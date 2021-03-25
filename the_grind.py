@@ -2438,7 +2438,7 @@ class Solution:
                 queue.append((p.left, q.left))
                 queue.append((p.right, q.right))
         return True
-        
+
 class Solution:
     def isSameTree(self, p: TreeNode, q: TreeNode) -> bool:
         queue = deque([(p, q)])
@@ -2540,6 +2540,33 @@ class Solution:
         if a.val != b.val:
             return False
         return self.isSame(a.left, b.left) and self.isSame(a.right, b.right)
+
+# iteartive solution using queue
+class Solution:
+    def isSubtree(self, s: TreeNode, t: TreeNode) -> bool:
+        def sameTree(s, t):
+            queue = deque([(s, t)])
+            while queue:
+                s, t = queue.popleft()
+                if not s and not t:
+                    continue
+                if not s or not t:
+                    return False
+                if s.val != t.val:
+                    return False
+                if s:
+                    queue.append((s.left, t.left))
+                    queue.append((s.right, t.right))
+            return True
+        queue = deque([s])
+        while queue:
+            s = queue.popleft()
+            if sameTree(s, t):
+                return True
+            if s:
+                queue.append(s.left)
+                queue.append(s.right)
+        return False
 
 # 98. Validate Binary Search Tree
 # Given a binary tree, determine if it is a valid binary search tree (BST).
