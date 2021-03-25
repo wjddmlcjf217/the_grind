@@ -2381,7 +2381,7 @@ class Solution:
         else:
             return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))
 
-# iterative bfs
+# iterative bfs, building an array of nodes per level and returning the length of that array
 class Solution:
     def maxDepth(self, root: TreeNode) -> int:
         if not root:
@@ -2401,6 +2401,23 @@ class Solution:
             nodes.append(curr_level)
         return len(nodes)
 
+# iterative bfs using a counter variable
+class Solution:
+    def maxDepth(self, root: TreeNode) -> int:
+        if not root:
+            return 0
+        queue = deque([root])
+        depth = 0
+        while queue:
+            size = len(queue)
+            for i in range(size):
+                curr_node = queue.popleft()
+                if curr_node.left:
+                    queue.append(curr_node.left)
+                if curr_node.right:
+                    queue.append(curr_node.right)
+            depth += 1
+        return depth
 # 100. Same Tree
 # Given two binary trees, write a function to check if they are the same or not.
 
