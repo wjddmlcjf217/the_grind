@@ -1826,6 +1826,43 @@ class Solution:
             curr_node = curr_node.next
         return head
 
+# 83. Remove Duplicates from Sorted List
+# Easy
+
+# 2378
+
+# 143
+
+# Add to List
+
+# Share
+# Given the head of a sorted linked list, delete all duplicates such that each element appears only once. Return the linked list sorted as well.
+
+ 
+
+# Example 1:
+
+
+# Input: head = [1,1,2]
+# Output: [1,2]
+# Example 2:
+
+
+# Input: head = [1,1,2,3,3]
+# Output: [1,2,3]
+
+class Solution:
+    def deleteDuplicates(self, head: ListNode) -> ListNode:
+        if not head:
+            return head
+        origin = head
+        while head and head.next:
+            if head.val == head.next.val: # 1->1->2->3->3 turn into 1->2->3
+                head.next = head.next.next
+            else:
+                head = head.next
+        return origin
+
 # Q: Merge two sorted linked lists and return it as a new list. The new list should be made by splicing together the nodes of the first two lists.
 
 # Example:
@@ -2381,7 +2418,7 @@ class Solution:
         else:
             return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))
 
-# iterative bfs, building an array of nodes per level and returning the length of that array
+# iterative bfs, building an array of nodes per level and returning the length of that
 class Solution:
     def maxDepth(self, root: TreeNode) -> int:
         if not root:
