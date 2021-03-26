@@ -1952,7 +1952,32 @@ class Solution:
         dummy.next = l2
     return head.next
 
-
+# same as above
+class Solution:
+    def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
+        # traverse both lists and compare node vals,  
+        # if l1.val > l2.val, l2.next = l1, l2 = l2.next and vice versa
+        
+        root = dummy = ListNode(0)
+        # root or dummy is 0, thus we need the next node that doesn't exist yet
+        if not l1 and not l2:
+            return root.next
+            
+        while l1 and l2:
+            if l1.val >= l2.val:
+                dummy.next = ListNode(l2.val)
+                l2 = l2.next
+            elif l1.val <= l2.val:
+                dummy.next = ListNode(l1.val)
+                l1 = l1.next
+            dummy = dummy.next
+        
+        if not l1:
+            dummy.next = l2
+        else:
+            dummy.next = l1
+        return root.next
+        
 # Q: Merge k sorted linked lists and return it as one sorted list. Analyze and describe its complexity.
 
 # Example:
