@@ -1977,7 +1977,7 @@ class Solution:
         else:
             dummy.next = l1
         return root.next
-        
+
 # Q: Merge k sorted linked lists and return it as one sorted list. Analyze and describe its complexity.
 
 # Example:
@@ -2744,6 +2744,55 @@ class Solution:
             if s:
                 queue.append(s.left)
                 queue.append(s.right)
+        return False
+
+
+# 112. Path Sum
+# Easy
+
+# 2955
+
+# 594
+
+# Add to List
+
+# Share
+# Given the root of a binary tree and an integer targetSum, return true if the tree has a root-to-leaf path such that adding up all the values along the path equals targetSum.
+
+# A leaf is a node with no children.
+
+ 
+
+# Example 1:
+
+
+# Input: root = [5,4,8,11,null,13,4,7,2,null,null,null,1], targetSum = 22
+# Output: true
+# Example 2:
+
+
+# Input: root = [1,2,3], targetSum = 5
+# Output: false
+# Example 3:
+
+# Input: root = [1,2], targetSum = 0
+# Output: false
+
+# BFS, traverse tree and keep track of node value sums as you traverse
+class Solution:
+    def hasPathSum(self, root: TreeNode, targetSum: int) -> bool:
+        if not root:
+            return False
+        queue = deque([(root, root.val)])
+        while queue:
+            curr_node, val = queue.popleft()
+            # condition to check if lead node and if the paths sum is target sum
+            if not curr_node.left and not curr_node.right and val == targetSum:
+                return True
+            if curr_node.left:
+                queue.append((curr_node.left, val + curr_node.left.val))
+            if curr_node.right:
+                queue.append((curr_node.right, val + curr_node.right.val))
         return False
 
 # 98. Validate Binary Search Tree
