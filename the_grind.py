@@ -2976,3 +2976,67 @@ def isValid(s):
         else:
             stack.append(char)
     return not stack
+
+
+HEAP
+
+# 295. Find Median from Data Stream
+# Hard
+
+# 3944
+
+# 72
+
+# Add to List
+
+# Share
+# The median is the middle value in an ordered integer list. If the size of the list is even, there is no middle value and the median is the mean of the two middle values.
+
+# For example, for arr = [2,3,4], the median is 3.
+# For example, for arr = [2,3], the median is (2 + 3) / 2 = 2.5.
+# Implement the MedianFinder class:
+
+# MedianFinder() initializes the MedianFinder object.
+# void addNum(int num) adds the integer num from the data stream to the data structure.
+# double findMedian() returns the median of all elements so far. Answers within 10-5 of the actual answer will be accepted.
+ 
+
+# Example 1:
+
+# Input
+# ["MedianFinder", "addNum", "addNum", "findMedian", "addNum", "findMedian"]
+# [[], [1], [2], [], [3], []]
+# Output
+# [null, null, null, 1.5, null, 2.0]
+
+# Explanation
+# MedianFinder medianFinder = new MedianFinder();
+# medianFinder.addNum(1);    // arr = [1]
+# medianFinder.addNum(2);    // arr = [1, 2]
+# medianFinder.findMedian(); // return 1.5 (i.e., (1 + 2) / 2)
+# medianFinder.addNum(3);    // arr[1, 2, 3]
+# medianFinder.findMedian(); // return 2.0
+
+class MedianFinder:
+
+    def __init__(self):
+        """
+        initialize your data structure here.
+        """
+        # smaller half of list, the max_heap
+        self.small = []
+        # bigger half of list, the min_heap
+        self.big = []
+
+    def addNum(self, num: int) -> None:
+        if len(self.small) == len(self.big):
+            # adding to maxheap, thus -num (since python only has minheap, we make it negative number), then adding to minheap, so -heappushpop to make it positive 
+            heappush(self.big, -heappushpop(self.small, -num))
+        else:
+            heappush(self.small, -heappushpop(self.big, num))
+
+    def findMedian(self) -> float:
+        if len(self.small) == len(self.big):
+            return float(self.big[0] - self.small[0]) / 2
+        else:
+            return float(self.big[0])
