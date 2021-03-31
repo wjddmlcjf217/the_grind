@@ -3090,3 +3090,35 @@ class Solution:
             i+=1
         return output
 
+# O(nlogn) solution using a heap 
+class Solution:
+    def kSmallestPairs(self, nums1: List[int], nums2: List[int], k: int) -> List[List[int]]:
+        if not nums1 and not nums2:
+            return []
+        # to push (sum, index1, index2) in a minheap
+        heap = []
+        # output array
+        output = []
+        # keep track of index that's been visited
+        visited = set()
+        # push intial sum and their index into heap
+        heappush(heap, (nums1[0] + nums2[0], 0, 0))
+        # mark the current indexes as visited
+        visited.add((0, 0))
+        # exit condition since len(output) cant exceed k and elements in heap
+        while len(output) < k and heap:
+            # the sum and pair of current index as a tuple
+            val = heappop(heap)
+            output.append((nums1[val[1]], nums2[val[2]]))
+            # check if the next index of nums1 is within bounds and if pair of index not visited
+            if val[1] + 1 < len(nums1) and (val[1] + 1, val[2]) not in visited:
+                # push to heap and mark as visited
+                heappush(heap, (nums1[val[1] + 1] + nums2[val[2]], val[1] + 1, val[2]))
+                visited.add((val[1] + 1, val[2]))
+            #  check if the next index of nums2 is within bounds and if pair of index not visited
+            if val[2] + 1 < len(nums2) and (val[1], val[2] + 1) not in visited:
+                # push to heap and mark as visited
+                heappush(heap, (nums1[val[1]] + nums2[val[2] + 1], val[1], val[2] + 1))
+                visited.add((val[1], val[2] + 1))
+            # print(visited)
+        return output
