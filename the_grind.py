@@ -3122,3 +3122,50 @@ class Solution:
                 visited.add((val[1], val[2] + 1))
             # print(visited)
         return output
+
+# 347. Top K Frequent Elements
+# Medium
+
+# 4702
+
+# 265
+
+# Add to List
+
+# Share
+# Given an integer array nums and an integer k, return the k most frequent elements. You may return the answer in any order.
+
+ 
+
+# Example 1:
+
+# Input: nums = [1,1,1,2,2,3], k = 2
+# Output: [1,2]
+# Example 2:
+
+# Input: nums = [1], k = 1
+# Output: [1]
+
+# brute force
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        nums_map = {}
+        for i in range(len(nums)):
+            if nums[i] not in nums_map:
+                nums_map[nums[i]] = 1
+            else:
+                nums_map[nums[i]] += 1
+        print(nums_map)
+        output = set()
+        max_val = 0
+        max_freq = 0
+        while k > 0:
+            for key, val in nums_map.items():
+                if val > max_freq and key not in output:
+                    max_freq = val
+                    max_val = key
+            output.add(max_val)
+            max_freq = 0
+            k -= 1
+        output = list(output)
+        return output
