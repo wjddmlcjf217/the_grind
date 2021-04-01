@@ -3223,8 +3223,7 @@ class Solution:
         output = 0
         for i in range(len(nums)):
             heappush(heap, -nums[i])
-        j = 0
-        while j < k:
+        while k > 0:
             output = heappop(heap)
-            j += 1
+            k -= 1
         return -output
