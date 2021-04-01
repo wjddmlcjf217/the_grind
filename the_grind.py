@@ -3169,3 +3169,62 @@ class Solution:
             k -= 1
         output = list(output)
         return output
+
+# maxheap solution
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        nums_map = {}
+        output = []
+        heap = []
+        for i in range(len(nums)):
+            if nums[i] not in nums_map:
+                nums_map[nums[i]] = 1
+            else:
+                nums_map[nums[i]] += 1
+        for key, val in nums_map.items():
+            # creating a maxheap by makign the frequency negative
+            heappush(heap, (-val, key))
+        while k > 0:
+            # top node from maxheap will always be greatest frequency
+            val = heappop(heap)
+            output.append(val[1])
+            k-=1
+        return output
+
+# 215. Kth Largest Element in an Array
+# Medium
+
+# 5374
+
+# 346
+
+# Add to List
+
+# Share
+# Given an integer array nums and an integer k, return the kth largest element in the array.
+
+# Note that it is the kth largest element in the sorted order, not the kth distinct element.
+
+ 
+
+# Example 1:
+
+# Input: nums = [3,2,1,5,6,4], k = 2
+# Output: 5
+# Example 2:
+
+# Input: nums = [3,2,3,1,2,4,5,5,6], k = 4
+# Output: 4
+
+# maxheap solution
+class Solution:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        heap = []
+        output = 0
+        for i in range(len(nums)):
+            heappush(heap, -nums[i])
+        j = 0
+        while j < k:
+            output = heappop(heap)
+            j += 1
+        return -output
