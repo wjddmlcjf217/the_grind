@@ -3227,3 +3227,46 @@ class Solution:
             output = heappop(heap)
             k -= 1
         return -output
+
+# 451. Sort Characters By Frequency
+# Medium
+
+# 2234
+
+# 147
+
+# Add to List
+
+# Share
+# Given a string, sort it in decreasing order based on the frequency of characters.
+
+# Example 1:
+
+# Input:
+# "tree"
+
+# Output:
+# "eert"
+
+# Explanation:
+# 'e' appears twice while 'r' and 't' both appear once.
+# So 'e' must appear before both 'r' and 't'. Therefore "eetr" is also a valid answer.
+
+# heap solution
+class Solution:
+    def frequencySort(self, s: str) -> str:
+        heap = []
+        char_map = {}
+        output = ""
+        for i in range(len(s)):
+            if s[i] not in char_map:
+                char_map[s[i]] = 1
+            else:
+                char_map[s[i]] += 1
+        for key, val in char_map.items():
+            heappush(heap, (-val, key))
+        while heap:
+            char = heappop(heap)
+            for i in range(-char[0]):
+                output += char[1]
+        return output
