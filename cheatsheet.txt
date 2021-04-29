@@ -1,0 +1,55 @@
+Python
+
+List / Array
+l = []
+l.pop() 
+l.append(item)
+l.insert(index, item)
+item in l | item not in l
+l[index]
+len(l)
+
+Set
+set = set()
+set.add(item)
+set.remove(item)
+
+Dictionary / Hashmap
+map = {}
+map[key] = value
+item in map | item not in map
+
+Misc
+float('inf') | float('inf')
+num // number # truncated integer division
+
+Javascript
+
+Array
+arr = []
+arr.length
+arr.includes(item)
+arr.splice(index, item) // deletes item at that index
+arr.splice(index, 0, item) // inserts item at index (first param), 2nd param must be 0 to insert items
+arr.pop() // removes last element
+arr.push() // adds to last element
+arr.shift() // removes front element
+arr.unshift() // adds to front
+
+
+Map
+map = new Map()
+map.set(key, value)
+map.size
+map.get(key) // return value associated with key 
+map.has(key) // return true/false 
+
+for (let [key, val] of map) {}
+for (let key of map.keys()) {}
+for (let key of map.values()) {}
+
+
+Misc
+
+Number.MIN_VALUE | Number.MAX_VALUE
+num.toString()
