@@ -364,6 +364,31 @@ def containsDuplicates(nums):
             return True
     return False
 
+# js, using set
+var containsDuplicate = function(nums) {
+    map = new Set()
+    for (i = 0; i < nums.length; i++) {
+        if (!(map.has(nums[i]))) {
+            map.add(nums[i])
+        } else {
+            return true
+        }
+    }
+    return false
+};
+
+# js using map, better than object
+var containsDuplicate = function(nums) {
+    map = new Map()
+    for (i = 0; i < nums.length; i++) {
+        if (!(map.has(nums[i]))) {
+            map.set(nums[i], i)
+        } else {
+            return true
+        }
+    }
+    return false
+};
 
 # Q: Say you have an array for which the ith element is the price of a given stock on day i.
 
