@@ -22,6 +22,7 @@ item in map | item not in map
 Misc
 float('inf') | float('inf')
 num // number # truncated integer division
+Node.val, Node.left, Node.right
 
 Javascript
 
@@ -53,3 +54,4 @@ Misc
 
 Number.MIN_VALUE | Number.MAX_VALUE
 num.toString()
+Node.val, Node.left, Node.right
