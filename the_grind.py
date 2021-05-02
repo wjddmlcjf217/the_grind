@@ -1365,6 +1365,28 @@ class Solution:
 # Input: "bbbbb"
 # Output: 1
 # Explanation: The answer is "b", with the length of 1.
+
+# brute force
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        if len(s) == 0:
+            return 0
+        output = 1
+        hashset = set()
+        for i in range(len(s)):
+            currStr = s[i]
+            hashset.add(s[i])
+            for j in range(i+1, len(s)):
+                if s[j] not in hashset:
+                    hashset.add(s[j])
+                    currStr += s[j]
+                    output = max(output, len(currStr))
+                else:
+                    hashset.clear()
+                    break
+        return output
+
+
 SLIDING WINDOW 
 def lengthOfLongestSubstring(self, s: str) -> int:
     # have 2 pointers anchor, and lead 
