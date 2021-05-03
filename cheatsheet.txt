@@ -13,6 +13,7 @@ Set
 set = set()
 set.add(item)
 set.remove(item)
+set.clear()
 
 Dictionary / Hashmap
 map = {}
@@ -37,6 +38,13 @@ arr.push() // adds to last element
 arr.shift() // removes front element
 arr.unshift() // adds to front
 
+Set
+set = new Set()
+set.add(item)
+set.delete(item)
+set.size
+set.has(item)
+set.clear()
 
 Map
 map = new Map()
