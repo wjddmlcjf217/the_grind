@@ -1181,6 +1181,44 @@ class Solution:
             container.append(curr_row)
         return container
 
+# 119. Pascal's Triangle II
+# Easy
+
+# Given an integer rowIndex, return the rowIndexth (0-indexed) row of the Pascal's triangle.
+
+# In Pascal's triangle, each number is the sum of the two numbers directly above it as shown:
+
+# Example 1:
+
+# Input: rowIndex = 3
+# Output: [1,3,3,1]
+# Example 2:
+
+# Input: rowIndex = 0
+# Output: [1]
+# Example 3:
+
+# Input: rowIndex = 1
+# Output: [1,1]
+
+# solution using only O(rowIndex) space complexity
+class Solution:
+    def getRow(self, rowIndex: int) -> List[int]:
+
+        # 1 [1, 1, 0, 0]
+        # 2 [1, 1, 1, 0]
+        # 2 [1, 2, 1, 0]
+        # 3 [1, 2, 1, 1]
+        # 3 [1, 2, 3, 1]
+        # 3 [1, 3, 3, 1]
+
+        curr_row = [0] * (rowIndex + 1)
+        curr_row[0] = 1
+        for i in range(1, rowIndex + 1):
+            for j in range(i, 0, -1):
+                curr_row[j] = curr_row[j] + curr_row[j-1]
+                print(i, curr_row)
+        return curr_row
 
 # Q: Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.
 
