@@ -39,7 +39,7 @@ arr.shift() // removes front element
 arr.unshift() // adds to front
 
 Set
-set = new Set()
+set = new Set
 set.add(item)
 set.delete(item)
 set.size
