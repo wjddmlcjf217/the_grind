@@ -20,6 +20,7 @@ def even_odd(A):
       A[next_even], A[next_odd] = A[next_odd], A[next_even]
       next_odd -= 1
 
+TOP TIPS FOR ARRAYS
 Array problems often have simple brute.force solutions that use O(n) space, but there are subtler solutions that use the array itself to reduce space complexity to O(1).
 Filling an array from the front is slow, so see if it's possible to write values from the back
 Instead of deleting an entry (which requires moving all entries to its left), consider overwriting it.
@@ -30,3 +31,87 @@ Don't worry about preserving the integrity of the array (sortedness, keeping equ
 An array can serve as a good data structure when you know the distribution of the elements in advance. For example, a Boolean array of length W is a good choice for representing a subset of {0,'1.,. .. ,W - 1}. (When using a Boolean array to represent a subset of {'J.,2,3,.. . ,fl|, allocate anarray of sizen+1to simplifyindexing.) .
 \A/hen operating on 2D arrays, use parallel logic for rows and for columns
 Sometimes it's easier to simulate the specification, than to analytically solve for the result. For example, rather than writing a formula for the l-th entry in the spiral order for an n x n matrix, just compute the output from the beginning.
+
+Python List represents arrays, lists are dynamically-resized
+
+Instantiating a list
+- [3, 5, 7, 11], [1]+ [0]*10, list(range(100))
+
+Basic operations
+- len(A), A.append(42), A.remove(2), A.insert(3, 28)
+
+Instantiate 2d array
+- [[1, 2, 4, ], [13]]
+
+Check if value is present in array
+- a in A, this operation is O(n) where n is the size of the array
+
+Key list methods
+- min(A), max(A)
+- bisetc.bisect(A, 6), bisect.bisect_left(A,6), bisect.bisect_right(A,6)
+- A.reverse() in place, reversed(A) returns an iterator
+- A.sort() in place, sorted(A) returns a copy
+- del A[i] deletes the i-th element, del A[i:j] removes the slice
+
+Slicing
+- A = [1, 6, 3, 4, 5, 2, 7]
+- A[:-1] = [1, 6, 3, 4, 5, 2]
+- A[-3:] = [5, 2, 77]
+- A[-3:-1] = [5, 2]
+- A[1:5:2] = [6, 4]
+- A[5:1:-2] = [2, 4]
+- A[::-1] = [7, 2, 5, 4, 3, 6, 1] reverses list
+- A[k:] + A[:k] rotates A by k to the left, 
+for k = 2, [3, 4, 5, 2, 7] + [1, 6] = [3, 4, 5, 2, 7, 1, 6]
+- B = A[:] shallow copies A into B
+
+List comprehension
+- [x**2 for x in range(6)]  = [0, 1, 4, 9, 16, 25]
+- [x**2 for x in range(6) if x%2 == 0] = [0, 4, 16]
+- A = [1, 3, 5], B = ['a', 'b'], [(x, y) for x in A for y in B] = [(1, 'a'), (1, 'b'), (2, 'a'), (2, 'b'), (3, 'a'), (3, 'b')]
+- M = [['a', 'b', 'c'] ,['d', 'e', 'f']], x for row in M for x in row = ['a', 'b', 'c', 'd', 'e', 'f']
+- M = [[1, 2, 3], [4, 5, 6]], then [[x**2 for x in row] in M]] = [[1, 4, 9], [16, 25, 36]]
+
+5.1 The Dutch National Flag Problem
+- find pivot index, partition in a way such that elements less than, equal to, greater than pivot value 
+- A = [0, 1, 2, 0, 2, 1, 1]
+- pivot index = 3, A[3] = 0, valid partition = [0, 0, 1, 2, 2, 1, 1]
+- pivot index = 2, A[2] = 2, valid partition = [0, 1, 0, 1, 1, 2, 2], [0, 0, 1, 1, 1, 2, 2]
+
+def dutch_flag_partition(pivot_index, A):
+  pivot = A[pivot_index]
+  # Group elements < than pivot 
+  for i in range(len(A)):
+    # Look for smaller element
+    for j in range(i + 1, len(A)):
+      if A[i] < pivot:
+        A[i], A[j] = A[j], A[i]
+        break
+  # Group elements > than pivot
+  for i in reversed(range(len(A))):
+    if A[i] < pivot:
+      break
+    # look for larger element and shift
+    for j in reversed(range(i)): 
+      if A[j] > pivot: 
+        A[i], A[j] = A[j], A[i]
+        break
+- O(1) space complexity, O(n^2) time complexity, 
+
+def dutch_flag_partition(pivot_index, A):
+  pivot = A[pivot_index]
+  smaller = 0
+  # group elements < pivot
+  for i in range(len(A)):
+    if A[i] < pivot:
+      A[i], A[smaller] = A[smaller], A[i]
+      smaller += 1
+  larger = len(A) - 1
+  # group elements > pivot
+  for i in reversed(range(len(A))):
+    if A[i] < pivot:
+      break
+    elif A[i] > pivot:
+      A[i], A[larger] = A[larger], A[i]
+      larger += 1
+    
